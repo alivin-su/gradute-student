@@ -44,7 +44,7 @@
 
     <!-- 切面 -->
     <aop:config>
-        <aop:pointcut id="txpc" expression="execution(* com.colin.service.impl.*.*(..))"/>
+        <aop:pointcut id="txpc" expression="execution(* com.d.service.impl.*.*(..))"/>
         <!-- 配置切面 : 通知+切点
             advice-ref:通知的名称
             pointcut-ref:切点的名称

@@ -9,6 +9,6 @@
     </settings>
 <!--将类起别名-->
     <typeAliases>
-        <package name="com.colin.bean"/>
+        <package name="com.d.bean"/>
     </typeAliases>
 </configuration>
