@@ -1,6 +1,9 @@
 package com.d.service;
 
-import com.d.bean.User;
+import com.d.bean.Student;
+import com.d.bean.Thesis;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA
@@ -12,5 +15,7 @@ import com.d.bean.User;
 
 public interface UserService {
 
-    User isExist(String name, String password);
+    Student isExist(String name, String password);
+
+    List<Thesis> selectThesis(String name);
 }

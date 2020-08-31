@@ -1,10 +1,14 @@
 package com.d.controller;
 
-import com.d.bean.User;
+import com.d.bean.Student;
+import com.d.bean.Thesis;
 import com.d.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA
@@ -23,10 +27,26 @@ public class LoginController {
 
     @RequestMapping("/isExist")
     public String isExist(String name,String password) {
-        User user = userService.isExist(name, password);
-        if (user != null) {
-            return "index";
+        Student student = userService.isExist(name, password);
+        if (student != null) {
+            return "forward:/loginController/selectThesis";
         }
         return "register";
+    }
+
+    @RequestMapping("/selectThesis")
+    public String selectThesis(String name, Model model) {
+        List<Thesis> thesis = userService.selectThesis(name);
+        model.addAttribute("thesis", thesis);
+        return "studentIndex";
+    }
+
+    @RequestMapping("/updateThesis")
+    public String updateThesis() {
+
+    }
+    @RequestMapping("/test")
+    public String test() {
+        return "test";
     }
 }

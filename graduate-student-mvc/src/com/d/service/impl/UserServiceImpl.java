@@ -1,10 +1,13 @@
 package com.d.service.impl;
 
-import com.d.bean.User;
+import com.d.bean.Student;
+import com.d.bean.Thesis;
 import com.d.mapper.UserMapper;
 import com.d.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA
@@ -20,7 +23,13 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-    public User isExist(String name, String password) {
+    public Student isExist(String name, String password) {
         return userMapper.isExist(name, password);
     }
+
+    @Override
+    public List<Thesis> selectThesis(String name) {
+        return userMapper.selectThesis(name);
+    }
+
 }
