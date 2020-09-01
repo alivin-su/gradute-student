@@ -29,22 +29,12 @@ public class LoginController {
     public String isExist(String name,String password) {
         Student student = userService.isExist(name, password);
         if (student != null) {
-            return "forward:/loginController/selectThesis";
+            return "forward:/thesis/selectThesis";
         }
         return "register";
     }
 
-    @RequestMapping("/selectThesis")
-    public String selectThesis(String name, Model model) {
-        List<Thesis> thesis = userService.selectThesis(name);
-        model.addAttribute("thesis", thesis);
-        return "studentIndex";
-    }
 
-    @RequestMapping("/updateThesis")
-    public String updateThesis() {
-
-    }
     @RequestMapping("/test")
     public String test() {
         return "test";

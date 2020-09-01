@@ -27,9 +27,4 @@ public class UserServiceImpl implements UserService {
         return userMapper.isExist(name, password);
     }
 
-    @Override
-    public List<Thesis> selectThesis(String name) {
-        return userMapper.selectThesis(name);
-    }
-
 }

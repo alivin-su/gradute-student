@@ -17,5 +17,5 @@ public interface UserService {
 
     Student isExist(String name, String password);
 
-    List<Thesis> selectThesis(String name);
+
 }

@@ -10,22 +10,27 @@
 <html>
 <head>
     <title>index</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h1>studentIndex</h1>
 
-    <table>
-        <thead>
-        <tr>
-            <th>论文题目</th>
-            <th>发表刊物</th>
-            <th>作者</th>
-            <th>发表年份</th>
-            <th>是否通过审核</th>
-            <th colspan="2">操作</th>
-        </tr>
-        </thead>
-        <c:forEach items="${thesis}" var="thesis">
+<h1>studentIndex</h1>
+<table class="table table-hover" id="studentTable">
+    <thead>
+    <tr>
+        <th></th>
+        <th>论文题目</th>
+        <th>发表刊物</th>
+        <th>作者</th>
+        <th>发表年份</th>
+        <th>是否通过审核</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <c:forEach items="${thesis.pageData}" var="thesis">
         <tbody>
         <tr>
             <td>${thesis.id}</td>
@@ -34,11 +39,25 @@
             <td>${thesis.author}</td>
             <td>${thesis.year}</td>
             <td>${thesis.check}</td>
-            <td onclick="location.href ='/' ">修改</td>
-            <td>删除</td>
+            <td>
+                <button type="button" class="btn btn-info"><a href="/thesis/updateThesis?thesisID=${thesis.id}">修改</a></button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-info"><a href="/thesis/deleteThesis?thesisID=${thesis.id}">删除</a></button>
+            </td>
         </tr>
         </tbody>
-        </c:forEach>
-    </table>
+    </c:forEach>
+    <tr>
+        <td colspan="3" align="center">
+            当前${thesis.currentPage }/${thesis.totalPage }页       
+            <a href="/thesis/selectThesis?currentPage=1">首页</a>
+            <a href="/thesis/selectThesis?currentPage=${thesis.currentPage-1}">上一页 </a>
+            <a href="/thesis/selectThesis?currentPage=${thesis.currentPage+1}">下一页 </a>
+            <a href="/thesis/selectThesis?currentPage=${thesis.totalPage}">末页</a>
+        </td>
+    </tr>
+</table>
+
 </body>
 </html>

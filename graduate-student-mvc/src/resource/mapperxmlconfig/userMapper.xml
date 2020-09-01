@@ -5,8 +5,5 @@
         select name, password
         from student where name = #{param1} and password = #{param2}
     </select>
-    <select id="selectThesis" resultType="com.d.bean.Thesis">
-        select `id`,`title`, `type`, `author`, `year`, `check`
-        from `thesis` where `user_thesis_id` = (select id from student where name = #{name})
-    </select>
+
 </mapper>
