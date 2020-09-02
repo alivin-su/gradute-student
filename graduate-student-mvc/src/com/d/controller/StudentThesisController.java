@@ -1,8 +1,10 @@
 package com.d.controller;
 
 import com.d.bean.Page;
+import com.d.bean.Student;
 import com.d.bean.Thesis;
 import com.d.service.StudentThesisService;
+import com.d.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,11 +26,17 @@ public class StudentThesisController {
     @Autowired
     StudentThesisService studentThesisService;
 
-    @RequestMapping("/selectThesis")
-    public String selectThesis(String name, Model model, Integer currentPage) {
-        List<Thesis> thesis = studentThesisService.selectThesis(name);
+    @Autowired
+    UserService userService;
 
+    @RequestMapping("/selectThesis")
+    public String selectThesis(Model model, Integer currentPage) {
         Page<Thesis> pageThesis = new Page<>();
+        Student student = userService.selectUser();
+
+        pageThesis.setStudent(student);
+        String name = pageThesis.getStudent().getName();
+        List<Thesis> thesis = studentThesisService.selectThesis(name);
 
         if (currentPage == null) {
             currentPage = 1;      // 第一次访问，设置当前页为1;

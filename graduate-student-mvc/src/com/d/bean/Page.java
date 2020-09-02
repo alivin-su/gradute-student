@@ -15,6 +15,15 @@ public class Page<T> {
     private Integer totalCount;
     private Integer totalPage;
     private List<T> pageData;
+    private Student student;
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 
     public Integer getCurrentPage() {
         return currentPage;
