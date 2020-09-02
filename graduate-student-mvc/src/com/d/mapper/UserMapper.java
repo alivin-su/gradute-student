@@ -8,5 +8,5 @@ import java.util.List;
 public interface UserMapper {
     Student isExist(String name, String password);
 
-    Student selectUser();
+    Student selectUser(String name);
 }

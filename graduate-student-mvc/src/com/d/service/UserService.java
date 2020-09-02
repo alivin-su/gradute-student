@@ -17,6 +17,6 @@ public interface UserService {
 
     Student isExist(String name, String password);
 
-    Student selectUser();
+    Student selectUser(String name);
 
 }

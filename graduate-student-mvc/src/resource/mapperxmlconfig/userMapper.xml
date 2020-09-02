@@ -6,7 +6,9 @@
         from student where name = #{param1} and password = #{param2}
     </select>
     <select id="selectUser" resultType="com.d.bean.Student">
-        select id,name from student
+        select id, name
+        from student
+        where name = #{name};
     </select>
 
 </mapper>

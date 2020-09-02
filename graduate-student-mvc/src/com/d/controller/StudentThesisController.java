@@ -30,12 +30,11 @@ public class StudentThesisController {
     UserService userService;
 
     @RequestMapping("/selectThesis")
-    public String selectThesis(Model model, Integer currentPage) {
+    public String selectThesis(String name, Model model, Integer currentPage) {
         Page<Thesis> pageThesis = new Page<>();
-        Student student = userService.selectUser();
+        Student student = userService.selectUser(name);
 
         pageThesis.setStudent(student);
-        String name = pageThesis.getStudent().getName();
         List<Thesis> thesis = studentThesisService.selectThesis(name);
 
         if (currentPage == null) {

@@ -51,10 +51,10 @@
     <tr>
         <td colspan="3" align="center">
             当前${thesis.currentPage }/${thesis.totalPage }页       
-            <a href="/thesis/selectThesis?currentPage=1">首页</a>
-            <a href="/thesis/selectThesis?currentPage=${thesis.currentPage-1}">上一页 </a>
-            <a href="/thesis/selectThesis?currentPage=${thesis.currentPage+1}">下一页 </a>
-            <a href="/thesis/selectThesis?currentPage=${thesis.totalPage}">末页</a>
+            <a href="/thesis/selectThesis?currentPage=1&name=${thesis.student.name}">首页</a>
+            <a href="/thesis/selectThesis?currentPage=${thesis.currentPage-1}&name=${thesis.student.name}">上一页 </a>
+            <a href="/thesis/selectThesis?currentPage=${thesis.currentPage+1}&name=${thesis.student.name}">下一页 </a>
+            <a href="/thesis/selectThesis?currentPage=${thesis.totalPage}&name=${thesis.student.name}">末页</a>
         </td>
     </tr>
 </table>

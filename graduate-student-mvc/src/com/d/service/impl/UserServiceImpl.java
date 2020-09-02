@@ -28,8 +28,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Student selectUser() {
-        return userMapper.selectUser();
+    public Student selectUser(String name) {
+        return userMapper.selectUser(name);
     }
 
 }
