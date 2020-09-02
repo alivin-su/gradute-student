@@ -38,7 +38,7 @@ public class StudentThesisController {
         List<Thesis> thesis = studentThesisService.selectThesis(name);
 
         if (currentPage == null) {
-            currentPage = 1;      // 第一次访问，设置当前页为1;
+            pageThesis.setCurrentPage(1);      // 第一次访问，设置当前页为1;
         } else {
             pageThesis.setCurrentPage(currentPage);
         }
@@ -47,13 +47,13 @@ public class StudentThesisController {
         pageThesis.setTotalCount(totalCount);
 
         //如果当前页<=0，将当前页设为1，若果当前页大于总页数，将当前页设置为最后一页
-        if (currentPage <= 0) {
+        if (pageThesis.getCurrentPage() <= 0) {
             pageThesis.setCurrentPage(1);
-        } else if (currentPage > pageThesis.getTotalCount()) {
+        } else if (pageThesis.getCurrentPage() > pageThesis.getTotalPage()) {
             pageThesis.setCurrentPage(pageThesis.getTotalPage());
         }
 
-        Integer index = (currentPage - 1) * pageThesis.getPageCount();
+        Integer index = (pageThesis.getCurrentPage() - 1) * pageThesis.getPageCount();
         Integer count = pageThesis.getPageCount();
 
         List<Thesis> pageThesis1 = studentThesisService.selectThesisByPage(name, index, count);
