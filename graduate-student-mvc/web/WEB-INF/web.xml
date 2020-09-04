@@ -44,8 +44,15 @@
 
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
+        <!-- /*表示拦截所有，包括转发的JSP页面  这是错误的，不能用 -->
+        <!-- /表示拦截所有的静态资源，不包括转发的JSP -->
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+<!--    可以看到在spring前端控制器DispatcherServlet中配置的是 / 拦截规则，这里配置 / 的意思是说，所有的请求都需要经过前端控制器，自然也会拦截所有的css、jsp、js等静态资源。-->
+
+    <welcome-file-list>
+        <welcome-file>/jsp/login.jsp</welcome-file>
+    </welcome-file-list>
 
     <servlet-mapping>
         <servlet-name>default</servlet-name>
@@ -53,8 +60,4 @@
         <url-pattern>*.jpg</url-pattern>
         <url-pattern>*.js</url-pattern>
     </servlet-mapping>
-
-    <welcome-file-list>
-        <welcome-file>/WEB-INF/jsp/login.jsp</welcome-file>
-    </welcome-file-list>
 </web-app>
