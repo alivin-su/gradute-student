@@ -14,7 +14,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/web/static/css/studentIndex.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -68,11 +67,12 @@
 </div>
 
 <script type="text/javascript">
+    //1.页面加载完成后，直接去发送ajax请求嘛，要到分页数据。
     $(function () {
         $.ajax({
             url:"/thesis/selectThesis",
             data: {name : "test",currentPage: "1"},
-            type: "GET",
+            type: "POST",
             success:function (result) {
                 //解析员工数据
                 build_thesis_table(result);
@@ -81,7 +81,7 @@
     });
 
     function build_thesis_table(result) {
-        var thesises = result.extend.thesis.pageData;
+        var thesises = result.extend(thesis.pageData);
         $.each(thesises, function (name, currentPage, item) {
             alert(item.title);
         })
