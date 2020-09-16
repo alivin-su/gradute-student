@@ -83,9 +83,17 @@
     });
 
     function build_thesis_table(result) {
-        var thesises = result.extend(thesis.pageData);
-        $.each(thesises, function (name, currentPage, item) {
-            alert(item.title);
+        var thesises = result.extend.thesis.pageData;
+        $.each(thesises, function (index, item) {
+            var thesisid = $("<td></td>").append();
+            var thesisName = $("<td></td>").append(item.title);
+            var thesisType = $("<td></td>").append(item.type);
+            var thesisAuthor = $("<td></td>").append(item.author);
+            var thesisYear = $("<td></td>").append(item.year);
+            var thesisCheck = $("<td></td>").append(item.check);
+            var editBtn = $("<button></button>").addClass("btn btn-default").append($("<span></span>").append("添加"));
+            var deleteBtn = $("<button></button>").addClass("btn btn-default").append($("<span></span>").append("删除"));
+            $("<tr></tr>").append(thesisid).append(thesisName).append(thesisType).append(thesisAuthor).append(thesisYear).append(thesisCheck).append(editBtn).append(deleteBtn).appendTo("#studentTable tbody");
         })
     }
 </script>
