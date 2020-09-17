@@ -69,10 +69,10 @@
     });
 
     //1.页面加载完成后，直接去发送ajax请求嘛，要到分页数据。
-    function to_page(currentPage) {
+    function to_page(name,currentPage) {
         $.ajax({
             url: "/thesis/selectThesis",
-            data: "currentPage=" + currentPage,
+            data: "name="+name+"&currentPage="+currentPage,
             type: "POST",
             success: function (result) {
                 // 解析员工数据
