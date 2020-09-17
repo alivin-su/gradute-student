@@ -52,35 +52,39 @@
         </table>
     </div>
     <%--   分页按钮 --%>
-    <div class="table-responsive">
-        <table class="row">
-            <tr>
-                <td colspan="3" align="center">
-                    当前/页，总页，总条记录  
-                    <a href="#">首页</a>
-                    <a href="#">上一页</a>
-                    <a href="#">下一页</a>
-                    <a href="#">末页</a>
-                </td>
-            </tr>
-        </table>
+    <div class="row">
+        <!--分页文字信息  -->
+        <div class="col-md-6" id="studentPage"></div>
+        <!-- 分页条信息 -->
+        <div class="col-md-6" id="studentNavPage">
+
+        </div>
     </div>
 </div>
 
 <script type="text/javascript">
-    //1.页面加载完成后，直接去发送ajax请求嘛，要到分页数据。
     $(function () {
+        //去首页
+        to_page(1);
+    });
+
+    //1.页面加载完成后，直接去发送ajax请求嘛，要到分页数据。
+    function to_page(currentPage) {
         $.ajax({
-            url:"/thesis/selectThesis",
-            data: "name=test",
+            url: "/thesis/selectThesis",
+            data: "currentPage=" + currentPage,
             type: "POST",
-            success:function (result) {
-               // 解析员工数据
+            success: function (result) {
+                // 解析员工数据
                 build_thesis_table(result);
                 // console.log(result);
+                //显示条
+                build_thesis_page(result);
+                //搭建分页条
+                built_thesis_nav(result);
             }
         });
-    });
+    }
 
     function build_thesis_table(result) {
         var thesises = result.extend.thesis.pageData;
@@ -93,8 +97,62 @@
             var thesisCheck = $("<td></td>").append(item.check);
             var editBtn = $("<button></button>").addClass("btn btn-default").append($("<span></span>").append("添加"));
             var deleteBtn = $("<button></button>").addClass("btn btn-default").append($("<span></span>").append("删除"));
-            $("<tr></tr>").append(thesisid).append(thesisName).append(thesisType).append(thesisAuthor).append(thesisYear).append(thesisCheck).append(editBtn).append(deleteBtn).appendTo("#studentTable tbody");
+            $("<tr></tr>").append(thesisid)
+                .append(thesisName)
+                .append(thesisType)
+                .append(thesisAuthor)
+                .append(thesisYear)
+                .append(thesisCheck)
+                .append(editBtn)
+                .append(deleteBtn)
+                .appendTo("#studentTable tbody");
         })
+    }
+
+    function build_thesis_page(result) {
+        $("#studentPage").append("当前第" + result.extend.thesis.currentPage + "页,")
+            .append("总" + result.extend.thesis.totalPage + "页")
+            .append("总" + result.extend.thesis.totalCount + "条");
+    }
+
+    function built_thesis_nav(result) {
+        var ul = $("<ul></ul>").addClass("pagination");
+
+        var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "#"));
+        var previewPageLi = $("<li></li>").append($("<a></a>").append("上一页").attr("href", "#"));
+        var nextPageLi = $("<li></li>").append($("<a></a>").append("下一页").attr("href", "#"));
+        var lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href", "#"));
+        ul.append(firstPageLi).append(previewPageLi).append(nextPageLi).append(lastPageLi);
+
+        firstPageLi.click(function () {
+            to_page(1);
+        })
+
+        previewPageLi.click(function () {
+            var tar = result.extend.thesis.currentPage - 1;
+            //如果当前页<=0，将当前页设为1
+            if (tar <= 0){
+                to_page(1);
+            }else {
+                to_page(tar);
+            }
+        })
+
+        previewPageLi.click(function () {
+            var tar = result.extend.thesis.currentPage + 1;
+            //若果当前页大于总页数，将当前页设置为最后一页
+            if (tar > result.extend.thesis.totalPage){
+                to_page(result.extend.thesis.totalPage);
+            }else {
+                to_page(tar);
+            }
+        })
+
+        lastPageLi.click(function () {
+            to_page(result.extend.thesis.totalPage);
+        })
+
+        $("#studentNavPage").append(ul);
     }
 </script>
 </body>
