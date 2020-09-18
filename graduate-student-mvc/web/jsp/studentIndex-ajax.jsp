@@ -56,24 +56,22 @@
         <!--分页文字信息  -->
         <div class="col-md-6" id="studentPage"></div>
         <!-- 分页条信息 -->
-        <div class="col-md-6" id="studentNavPage">
-
-        </div>
+        <div class="col-md-6" id="studentNavPage"></div>
     </div>
 </div>
 
 <script type="text/javascript">
     $(function () {
         //去首页
-        to_page(1);
+        to_page("test", 1);
     });
 
     //1.页面加载完成后，直接去发送ajax请求嘛，要到分页数据。
-    function to_page(name,currentPage) {
+    function to_page(name, currentPage) {
         $.ajax({
             url: "/thesis/selectThesis",
-            data: "name="+name+"&currentPage="+currentPage,
-            type: "POST",
+            data: "name=" + name + "&currentPage" + currentPage,
+            type: "GET",
             success: function (result) {
                 // 解析员工数据
                 build_thesis_table(result);
@@ -87,6 +85,7 @@
     }
 
     function build_thesis_table(result) {
+        $("#studentTable tbody").empty();
         var thesises = result.extend.thesis.pageData;
         $.each(thesises, function (index, item) {
             var thesisid = $("<td></td>").append();
@@ -110,49 +109,61 @@
     }
 
     function build_thesis_page(result) {
+        $("#studentPage").empty();
         $("#studentPage").append("当前第" + result.extend.thesis.currentPage + "页,")
             .append("总" + result.extend.thesis.totalPage + "页")
             .append("总" + result.extend.thesis.totalCount + "条");
     }
 
     function built_thesis_nav(result) {
+        $("#studentNavPage").empty();
         var ul = $("<ul></ul>").addClass("pagination");
 
-        var firstPageLi = $("<li></li>").append($("<a></a>").append("首页").attr("href", "#"));
-        var previewPageLi = $("<li></li>").append($("<a></a>").append("上一页").attr("href", "#"));
-        var nextPageLi = $("<li></li>").append($("<a></a>").append("下一页").attr("href", "#"));
-        var lastPageLi = $("<li></li>").append($("<a></a>").append("末页").attr("href", "#"));
+        var firstPageLi = $("<li></li>").append($("<a></a>").append($("<span></span>")).append("首页"));
+        var previewPageLi = $("<li></li>").append($("<a></a>").append($("<span></span>")).append("上一页"));
+        var nextPageLi = $("<li></li>").append($("<a></a>").append($("<span></span>")).append("下一页"));
+        var lastPageLi = $("<li></li>").append($("<a></a>").append($("<span></span>")).append("末页"));
         ul.append(firstPageLi).append(previewPageLi).append(nextPageLi).append(lastPageLi);
 
         firstPageLi.click(function () {
-            to_page(1);
-        })
+            to_page(result.extend.thesis.student.name,1);
+        });
 
         previewPageLi.click(function () {
-            var tar = result.extend.thesis.currentPage - 1;
-            //如果当前页<=0，将当前页设为1
-            if (tar <= 0){
-                to_page(1);
-            }else {
-                to_page(tar);
-            }
-        })
+            to_page(result.extend.thesis.student.name,result.extend.thesis.currentPage - 1);
+        });
 
-        previewPageLi.click(function () {
-            var tar = result.extend.thesis.currentPage + 1;
-            //若果当前页大于总页数，将当前页设置为最后一页
-            if (tar > result.extend.thesis.totalPage){
-                to_page(result.extend.thesis.totalPage);
-            }else {
-                to_page(tar);
-            }
-        })
+        nextPageLi.click(function () {
+            to_page(result.extend.thesis.student.name,result.extend.thesis.currentPage + 1);
+        });
 
         lastPageLi.click(function () {
-            to_page(result.extend.thesis.totalPage);
-        })
+            to_page(result.extend.thesis.student.name,result.extend.thesis.totalPage);
+        });
 
-        $("#studentNavPage").append(ul);
+        //
+        // previewPageLi.click(function () {
+        //     var tar = result.extend.thesis.currentPage - 1;
+        //     //如果当前页<=0，将当前页设为1
+        //     // if (tar < 1)
+        //     //     to_page(result.extend.thesis.student.name,1);
+        //         to_page(result.extend.thesis.student.name,tar);
+        // })
+        //
+        // previewPageLi.click(function () {
+        //     var tar = result.extend.thesis.currentPage + 1;
+        //     //若果当前页大于总页数，将当前页设置为最后一页
+        //     // if (tar > result.extend.thesis.totalPage)
+        //     //     to_page(result.extend.thesis.student.name,result.extend.thesis.totalPage);
+        //         to_page(result.extend.thesis.student.name,tar);
+        // })
+        //
+        // lastPageLi.click(function () {
+        //     to_page(result.extend.thesis.student.name,result.extend.thesis.totalPage);
+        // })
+        //
+        var navEle = $("<nav></nav>").append(ul);
+        $("#studentNavPage").append(navEle);
     }
 </script>
 </body>
