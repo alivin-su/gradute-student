@@ -140,31 +140,12 @@
         lastPageLi.click(function () {
             to_page(result.extend.thesis.student.name,result.extend.thesis.totalPage);
         });
-
-        //
-        // previewPageLi.click(function () {
-        //     var tar = result.extend.thesis.currentPage - 1;
-        //     //如果当前页<=0，将当前页设为1
-        //     // if (tar < 1)
-        //     //     to_page(result.extend.thesis.student.name,1);
-        //         to_page(result.extend.thesis.student.name,tar);
-        // })
-        //
-        // previewPageLi.click(function () {
-        //     var tar = result.extend.thesis.currentPage + 1;
-        //     //若果当前页大于总页数，将当前页设置为最后一页
-        //     // if (tar > result.extend.thesis.totalPage)
-        //     //     to_page(result.extend.thesis.student.name,result.extend.thesis.totalPage);
-        //         to_page(result.extend.thesis.student.name,tar);
-        // })
-        //
-        // lastPageLi.click(function () {
-        //     to_page(result.extend.thesis.student.name,result.extend.thesis.totalPage);
-        // })
-        //
         var navEle = $("<nav></nav>").append(ul);
         $("#studentNavPage").append(navEle);
     }
+
+
+
 </script>
 </body>
 </html>
