@@ -66,34 +66,37 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title" id="gridSystemModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-4">.col-md-4</div>
-                    <div class="col-md-4 col-md-offset-4">.col-md-4 .col-md-offset-4</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
-                    <div class="col-md-2 col-md-offset-4">.col-md-2 .col-md-offset-4</div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-9">
-                        Level 1: .col-sm-9
-                        <div class="row">
-                            <div class="col-xs-8 col-sm-6">
-                                Level 2: .col-xs-8 .col-sm-6
-                            </div>
-                            <div class="col-xs-4 col-sm-6">
-                                Level 2: .col-xs-4 .col-sm-6
-                            </div>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="thesisAuthor" class="col-sm-2 control-label">作者</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" id="thesisAuthor" name="thesisAuthor">
                         </div>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="thesisTitle" class="col-sm-2 control-label">论文题目</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" id="thesisTitle" name="thesisTitle">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">发表刊物</label>
+                        <div class="col-sm-5">
+                            <select class="form-control">
+                                <option>待从数据库查询</option>
+                                <option>待从数据库查询</option>
+                                <option>待从数据库查询</option>
+                                <option>待从数据库查询</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -137,7 +140,7 @@
             var thesisAuthor = $("<td></td>").append(item.author);
             var thesisYear = $("<td></td>").append(item.year);
             var thesisCheck = $("<td></td>").append(item.check);
-            var editBtn = $("<button></button>").addClass("btn btn-default").append($("<span></span>").append("添加"));
+            var editBtn = $("<button></button>").addClass("btn btn-default").append($("<span></span>").append("修改"));
             var deleteBtn = $("<button></button>").addClass("btn btn-default").append($("<span></span>").append("删除"));
             $("<tr></tr>").append(thesisid)
                 .append(thesisName)
@@ -169,19 +172,19 @@
         ul.append(firstPageLi).append(previewPageLi).append(nextPageLi).append(lastPageLi);
 
         firstPageLi.click(function () {
-            to_page(result.extend.thesis.student.name,1);
+            to_page(result.extend.thesis.student.name, 1);
         });
 
         previewPageLi.click(function () {
-            to_page(result.extend.thesis.student.name,result.extend.thesis.currentPage - 1);
+            to_page(result.extend.thesis.student.name, result.extend.thesis.currentPage - 1);
         });
 
         nextPageLi.click(function () {
-            to_page(result.extend.thesis.student.name,result.extend.thesis.currentPage + 1);
+            to_page(result.extend.thesis.student.name, result.extend.thesis.currentPage + 1);
         });
 
         lastPageLi.click(function () {
-            to_page(result.extend.thesis.student.name,result.extend.thesis.totalPage);
+            to_page(result.extend.thesis.student.name, result.extend.thesis.totalPage);
         });
         var navEle = $("<nav></nav>").append(ul);
         $("#studentNavPage").append(navEle);
@@ -189,8 +192,8 @@
 
     $("#addButton").click(function () {
         $("#addModel").modal({
-            backdrop:"static"
-            });
+            backdrop: "static"
+        });
     })
 </script>
 </body>

@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.d.mapper.StudentThesisMapper">
     <select id="selectThesis" resultType="com.d.bean.Thesis">
-        select `id`, `title`, `type`, `author`, `year`, `check`
+        select `id`, `title`,  `author`, `year`, `check`,`thesis_type_id`
         from `thesis`
         where `user_thesis_id` = (select id from student where name = #{name})
     </select>
     <select id="selectThesisById" resultType="com.d.bean.Thesis">
-        select `title`, `type`, `author`, `year`, `check`
+        select `title`,  `author`, `year`, `check`,`thesis_type_id`
         from `thesis`
         where id = #{thesisID}
     </select>
