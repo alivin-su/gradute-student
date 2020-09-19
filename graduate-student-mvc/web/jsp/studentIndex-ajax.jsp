@@ -13,12 +13,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-
 
 <div class="container">
     <%--  标题  --%>
@@ -28,9 +28,9 @@
     <%--    顶部按钮--%>
     <div class="row">
         <div class="col-md-2 col-md-offset-10">
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            <a type="button" class="btn btn-primary btn-lg" id="addButton">
                 添加
-            </button>
+            </a>
             <a class="btn btn-default" href="#" role="button">批量删除</a>
         </div>
     </div>
@@ -62,32 +62,46 @@
     </div>
 </div>
 
-
-<%--添加--%>
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="addModel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <h4 class="modal-title" id="gridSystemModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
-                ...
+                <div class="row">
+                    <div class="col-md-4">.col-md-4</div>
+                    <div class="col-md-4 col-md-offset-4">.col-md-4 .col-md-offset-4</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-md-offset-3">.col-md-3 .col-md-offset-3</div>
+                    <div class="col-md-2 col-md-offset-4">.col-md-2 .col-md-offset-4</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">.col-md-6 .col-md-offset-3</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-9">
+                        Level 1: .col-sm-9
+                        <div class="row">
+                            <div class="col-xs-8 col-sm-6">
+                                Level 2: .col-xs-8 .col-sm-6
+                            </div>
+                            <div class="col-xs-4 col-sm-6">
+                                Level 2: .col-xs-4 .col-sm-6
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <script type="text/javascript">
     $(function () {
@@ -172,6 +186,12 @@
         var navEle = $("<nav></nav>").append(ul);
         $("#studentNavPage").append(navEle);
     }
+
+    $("#addButton").click(function () {
+        $("#addModel").modal({
+            backdrop:"static"
+            });
+    })
 </script>
 </body>
 </html>
