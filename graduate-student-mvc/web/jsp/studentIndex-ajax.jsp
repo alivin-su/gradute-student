@@ -70,7 +70,7 @@
     function to_page(name, currentPage) {
         $.ajax({
             url: "/thesis/selectThesis",
-            data: "name=" + name + "&currentPage" + currentPage,
+            data: "name=" + name + "&currentPage=" + currentPage,
             type: "GET",
             success: function (result) {
                 // 解析员工数据
