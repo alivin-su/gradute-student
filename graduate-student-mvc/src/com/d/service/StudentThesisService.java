@@ -17,4 +17,6 @@ public interface StudentThesisService {
 
 
     List<Map<Integer, Object>> selectThesisType();
+
+    void insertThesis(String title, Integer thesisTypeId, String author, String year, Integer check);
 }

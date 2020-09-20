@@ -85,19 +85,33 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="thesisTitle" class="col-sm-2 control-label">当前时间</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" id="year" name="year">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-2 control-label">发表刊物</label>
                         <div class="col-sm-5">
-                            <select class="form-control" id="selectThesisType">
+                            <select class="form-control" id="selectThesisType" name="thesisTypeId">
 
                             </select>
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">审核通过</label>
+                        <div class="col-sm-5">
+                            <select class="form-control" id="access" name="check">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="thesisTypeSave">保存</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -199,6 +213,7 @@
 
     //下拉列表的ajax请求
     function getThesisType() {
+        $("#selectThesisType").empty();
         $.ajax({
             url: "/thesis/selectThesisType",
             type: "GET",
@@ -210,6 +225,30 @@
             }
         });
     }
+
+    $("#thesisTypeSave").click(function () {
+        // $.ajax({
+        //     url:"/thesis/saveThesis",
+        //     type:"POST",
+        //     data:$("#addModel form").serialize();
+        //     success: function (result) {
+        //        // alert(result);
+        //     }
+        // })
+        alert($("#addModel form").serialize());
+    })
+
+
+    /*-------------------- 获取系统当前时间方法start------------------------ */
+    function datetime() {
+        var now = new Date();
+        document.getElementById("year").value = now.getFullYear() + "-"
+            + (now.getMonth() + 1) + "-" + now.getDate();
+        document.getElementById("year").value += " " + now.getHours() + ":"
+            + now.getMinutes() + ":" + now.getSeconds();
+    }
+    window.setInterval("datetime()", 1000);
+    /*--------------------------- 获取系统当前时间方法end------------------------ */
 </script>
 </body>
 </html>
