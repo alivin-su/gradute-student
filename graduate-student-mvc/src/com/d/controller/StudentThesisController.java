@@ -11,7 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA
@@ -104,6 +107,14 @@ public class StudentThesisController {
 //        model.addAttribute("thesis", thesis);
 //        return "stuUpdateThesis";
 //    }
+
+    @ResponseBody
+    @RequestMapping("/selectThesisType")
+    public Msg selectThesisType(){
+        List<Map<Integer, Object>> list = studentThesisService.selectThesisType();
+        return Msg.success().add("thesisType",list);
+    }
+
 
     @RequestMapping("/deleteThesis")
     public String deleteThesis(String thesisID, Model model) {

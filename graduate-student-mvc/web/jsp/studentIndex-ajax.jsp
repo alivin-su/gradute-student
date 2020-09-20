@@ -87,11 +87,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">发表刊物</label>
                         <div class="col-sm-5">
-                            <select class="form-control">
-                                <option>待从数据库查询</option>
-                                <option>待从数据库查询</option>
-                                <option>待从数据库查询</option>
-                                <option>待从数据库查询</option>
+                            <select class="form-control" id="selectThesisType">
+
                             </select>
                         </div>
                     </div>
@@ -136,7 +133,7 @@
         $.each(thesises, function (index, item) {
             var thesisid = $("<td></td>").append();
             var thesisName = $("<td></td>").append(item.title);
-            var thesisType = $("<td></td>").append(item.type);
+            var thesisType = $("<td></td>").append(item.thesisTypeId);
             var thesisAuthor = $("<td></td>").append(item.author);
             var thesisYear = $("<td></td>").append(item.year);
             var thesisCheck = $("<td></td>").append(item.check);
@@ -190,11 +187,29 @@
         $("#studentNavPage").append(navEle);
     }
 
+    //点击新增按钮弹出模态框
     $("#addButton").click(function () {
+        //发送ajax请求，查出发表期刊类型，显示在下拉列表中
+        getThesisType();
+        //弹出模态框
         $("#addModel").modal({
             backdrop: "static"
         });
     })
+
+    //下拉列表的ajax请求
+    function getThesisType() {
+        $.ajax({
+            url: "/thesis/selectThesisType",
+            type: "GET",
+            success: function (result) {
+                $.each(result.extend.thesisType, function (index,item) {
+                    var optionEle = $("<option></option>").append(item.type).attr("value", item.id);
+                    optionEle.appendTo("#selectThesisType");
+                });
+            }
+        });
+    }
 </script>
 </body>
 </html>

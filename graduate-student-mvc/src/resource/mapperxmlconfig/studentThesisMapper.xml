@@ -12,8 +12,12 @@
         where id = #{thesisID}
     </select>
     <select id="selectThesisByPage" resultType="com.d.bean.Thesis">
-        select `id`, `title`, `type`, `author`, `year`, `check`
+        select `id`, `title`, `thesis_type_id`, `author`, `year`, `check`
         from `thesis`
         where `user_thesis_id` = (select id from student where name = #{param1}) limit #{param2},#{param3}
     </select>
+    <select id="selectThesisType" resultType="java.util.Map">
+        select `id`,`type` from `thesistype`
+    </select>
+
 </mapper>

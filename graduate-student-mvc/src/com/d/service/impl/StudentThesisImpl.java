@@ -1,5 +1,6 @@
 package com.d.service.impl;
 
+import com.d.bean.Msg;
 import com.d.bean.Page;
 import com.d.bean.Thesis;
 import com.d.mapper.StudentThesisMapper;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA
@@ -34,6 +36,11 @@ public class StudentThesisImpl implements StudentThesisService {
     @Override
     public List<Thesis> selectThesisByPage(String name, int index, int count) {
         return studentThesisMapper.selectThesisByPage(name, index, count);
+    }
+
+    @Override
+    public List<Map<Integer, Object>> selectThesisType() {
+        return studentThesisMapper.selectThesisType();
     }
 
 

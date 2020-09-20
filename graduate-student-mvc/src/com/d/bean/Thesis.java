@@ -10,7 +10,7 @@ package com.d.bean;
 public class Thesis {
     private Integer id;
     private String title;
-    private String type;
+    private Integer thesisTypeId;
     private String author;
     private String year;
     private Integer check;
@@ -18,20 +18,20 @@ public class Thesis {
     public Thesis() {
     }
 
-    public Thesis(int id, String title, String type, String author, String year, int check) {
+    public Thesis(Integer id, String title, Integer thesisTypeId, String author, String year, Integer check) {
         this.id = id;
         this.title = title;
-        this.type = type;
+        this.thesisTypeId = thesisTypeId;
         this.author = author;
         this.year = year;
         this.check = check;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -43,12 +43,12 @@ public class Thesis {
         this.title = title;
     }
 
-    public String getType() {
-        return type;
+    public Integer getThesisTypeId() {
+        return thesisTypeId;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setThesisTypeId(Integer thesisTypeId) {
+        this.thesisTypeId = thesisTypeId;
     }
 
     public String getAuthor() {
@@ -67,11 +67,11 @@ public class Thesis {
         this.year = year;
     }
 
-    public int getCheck() {
+    public Integer getCheck() {
         return check;
     }
 
-    public void setCheck(int check) {
+    public void setCheck(Integer check) {
         this.check = check;
     }
 }
