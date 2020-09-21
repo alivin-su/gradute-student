@@ -128,6 +128,7 @@
 </div><!-- /.modal -->
 
 <script type="text/javascript">
+    var userName,totalRecord;
     $(function () {
         //去首页
         to_page("test", 1);
@@ -172,6 +173,7 @@
                 .append(editBtn)
                 .append(deleteBtn)
                 .appendTo("#studentTable tbody");
+            userName = result.extend.thesis.student.name;
         })
     }
 
@@ -180,6 +182,7 @@
         $("#studentPage").append("当前第" + result.extend.thesis.currentPage + "页,")
             .append("总" + result.extend.thesis.totalPage + "页")
             .append("总" + result.extend.thesis.totalCount + "条");
+        totalRecord = result.extend.thesis.totalCount;
     }
 
     function built_thesis_nav(result) {
@@ -244,7 +247,8 @@
             data: $("#addModeForm").serialize(),
             dataType: "json",
             success: function () {
-                alert("处理成功");
+                $("#addModel").modal('hide');
+                to_page(userName,totalRecord);
             }
         });
     });
