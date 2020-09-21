@@ -82,7 +82,8 @@ public class StudentThesisController {
         String author = thesis.getAuthor();
         String year = thesis.getYear();
         Integer check = thesis.getCheck();
-        studentThesisService.insertThesis(title,thesisTypeId,author,year,check);
+        Integer userThesisId = thesis.getUserThesisId();
+        studentThesisService.insertThesis(title,thesisTypeId,author,year,check,userThesisId);
         return Msg.success();
     }
 

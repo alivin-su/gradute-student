@@ -39,7 +39,7 @@
         <table class="table table-hover" id="studentTable">
             <thead>
             <tr>
-                <th></th>
+                <th>UserID</th>
                 <th>论文题目</th>
                 <th>发表刊物</th>
                 <th>作者</th>
@@ -71,37 +71,47 @@
                 <h4 class="modal-title" id="gridSystemModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="addModeForm">
                     <div class="form-group">
-                        <label for="thesisAuthor" class="col-sm-2 control-label">作者</label>
+                        <label for="userThesisId" class="col-sm-2 control-label">UserID</label>
                         <div class="col-sm-5">
-                            <input class="form-control" id="thesisAuthor" name="thesisAuthor">
+                            <%-- <input class="form-control" id="thesisAuthor" name="thesisAuthor">--%>
+                            <input class="form-control" id="userThesisId" name="userThesisId">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="thesisTitle" class="col-sm-2 control-label">论文题目</label>
+                        <label for="author" class="col-sm-2 control-label">作者</label>
                         <div class="col-sm-5">
-                            <input class="form-control" id="thesisTitle" name="thesisTitle">
+<%--                            <input class="form-control" id="thesisAuthor" name="thesisAuthor">--%>
+                            <input class="form-control" id="author" name="author">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="thesisTitle" class="col-sm-2 control-label">当前时间</label>
+                        <label for="title" class="col-sm-2 control-label">论文题目</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" id="title" name="title">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="year" class="col-sm-2 control-label">当前时间</label>
                         <div class="col-sm-5">
                             <input class="form-control" id="year" name="year">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">发表刊物</label>
+                        <label class="col-sm-2 control-label" for="thesisTypeId">发表刊物</label>
                         <div class="col-sm-5">
-                            <select class="form-control" id="selectThesisType" name="thesisTypeId">
+<%--                            <select class="form-control" id="selectThesisType" name="thesisTypeId">--%>
+                            <select class="form-control" id="thesisTypeId" name="thesisTypeId">
 
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">审核通过</label>
+                        <label class="col-sm-2 control-label" for="check">审核通过</label>
                         <div class="col-sm-5">
-                            <select class="form-control" id="access" name="check">
+<%--                            <select class="form-control" id="access" name="check">--%>
+                            <select class="form-control" id="check" name="check">
                                 <option value="1">是</option>
                                 <option value="0">否</option>
                             </select>
@@ -145,7 +155,7 @@
         $("#studentTable tbody").empty();
         var thesises = result.extend.thesis.pageData;
         $.each(thesises, function (index, item) {
-            var thesisid = $("<td></td>").append();
+            var userThesisId = $("<td></td>").append(item.userThesisId);
             var thesisName = $("<td></td>").append(item.title);
             var thesisType = $("<td></td>").append(item.thesisTypeId);
             var thesisAuthor = $("<td></td>").append(item.author);
@@ -153,7 +163,7 @@
             var thesisCheck = $("<td></td>").append(item.check);
             var editBtn = $("<button></button>").addClass("btn btn-default").append($("<span></span>").append("修改"));
             var deleteBtn = $("<button></button>").addClass("btn btn-default").append($("<span></span>").append("删除"));
-            $("<tr></tr>").append(thesisid)
+            $("<tr></tr>").append(userThesisId)
                 .append(thesisName)
                 .append(thesisType)
                 .append(thesisAuthor)
@@ -213,30 +223,31 @@
 
     //下拉列表的ajax请求
     function getThesisType() {
-        $("#selectThesisType").empty();
+        $("#thesisTypeId").empty();
         $.ajax({
             url: "/thesis/selectThesisType",
             type: "GET",
             success: function (result) {
-                $.each(result.extend.thesisType, function (index,item) {
+                $.each(result.extend.thesisType, function (index, item) {
                     var optionEle = $("<option></option>").append(item.type).attr("value", item.id);
-                    optionEle.appendTo("#selectThesisType");
+                    optionEle.appendTo("#thesisTypeId");
                 });
             }
         });
     }
 
     $("#thesisTypeSave").click(function () {
-        // $.ajax({
-        //     url:"/thesis/saveThesis",
-        //     type:"POST",
-        //     data:$("#addModel form").serialize();
-        //     success: function (result) {
-        //        // alert(result);
-        //     }
-        // })
-        alert($("#addModel form").serialize());
-    })
+        // alert($("#addModeForm").serialize());
+        $.ajax({
+            url: "/thesis/saveThesis",
+            type: "POST",
+            data: $("#addModeForm").serialize(),
+            dataType: "json",
+            success: function () {
+                alert("处理成功");
+            }
+        });
+    });
 
 
     /*-------------------- 获取系统当前时间方法start------------------------ */
@@ -245,8 +256,9 @@
         document.getElementById("year").value = now.getFullYear() + "-"
             + (now.getMonth() + 1) + "-" + now.getDate();
         document.getElementById("year").value += " " + now.getHours() + ":"
-            + now.getMinutes() + ":" + now.getSeconds();
+            + now.getMinutes();
     }
+
     window.setInterval("datetime()", 1000);
     /*--------------------------- 获取系统当前时间方法end------------------------ */
 </script>

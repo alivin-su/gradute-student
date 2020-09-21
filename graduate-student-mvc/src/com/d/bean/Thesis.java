@@ -9,6 +9,7 @@ package com.d.bean;
  */
 public class Thesis {
     private Integer id;
+    private Integer userThesisId;
     private String title;
     private Integer thesisTypeId;
     private String author;
@@ -18,8 +19,9 @@ public class Thesis {
     public Thesis() {
     }
 
-    public Thesis(Integer id, String title, Integer thesisTypeId, String author, String year, Integer check) {
+    public Thesis(Integer id, Integer userThesisId, String title, Integer thesisTypeId, String author, String year, Integer check) {
         this.id = id;
+        this.userThesisId = userThesisId;
         this.title = title;
         this.thesisTypeId = thesisTypeId;
         this.author = author;
@@ -33,6 +35,14 @@ public class Thesis {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getUserThesisId() {
+        return userThesisId;
+    }
+
+    public void setUserThesisId(Integer userThesisId) {
+        this.userThesisId = userThesisId;
     }
 
     public String getTitle() {

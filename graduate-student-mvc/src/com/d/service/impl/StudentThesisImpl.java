@@ -44,8 +44,8 @@ public class StudentThesisImpl implements StudentThesisService {
     }
 
     @Override
-    public void insertThesis(String title, Integer thesisTypeId, String author, String year, Integer check) {
-        studentThesisMapper.insertThesis(title,thesisTypeId,author,year,check);
+    public void insertThesis(String title, Integer thesisTypeId, String author, String year, Integer check, Integer userThesisId) {
+        studentThesisMapper.insertThesis(title, thesisTypeId, author, year, check, userThesisId);
     }
 
 }
