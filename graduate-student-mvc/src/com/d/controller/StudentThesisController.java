@@ -8,6 +8,7 @@ import com.d.service.StudentThesisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -92,5 +93,12 @@ public class StudentThesisController {
         Thesis thesis = studentThesisService.selectThesisByID(thesisID);
 
         return "stuDeleteThesis";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getThesisInfo/{id}",method = RequestMethod.GET)
+    public Msg getThesisInfo(@PathVariable("id")Integer id){
+       Thesis thesis = studentThesisService.selectThesisInfo(id);
+        return Msg.success().add("thesisInfo", thesis);
     }
 }

@@ -48,4 +48,9 @@ public class StudentThesisImpl implements StudentThesisService {
         studentThesisMapper.insertThesis(title, thesisTypeId, author, year, check, userThesisId);
     }
 
+    @Override
+    public Thesis selectThesisInfo(Integer id) {
+        return studentThesisMapper.selectThesisInfo(id);
+    }
+
 }

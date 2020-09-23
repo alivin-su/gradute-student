@@ -23,5 +23,8 @@
     <select id="selectThesisType" resultType="java.util.Map">
         select `id`,`type` from `thesistype`
     </select>
+    <select id="selectThesisInfo" resultType="com.d.bean.Thesis">
+        select `id`,`title`,`author`,`year`,`check`,`user_thesis_id`,`id_delete`,`thesis_type` from `thesis` where `id` = #{id}
+    </select>
 
 </mapper>

@@ -68,7 +68,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="gridSystemModalLabel">Modal title</h4>
+                <h4 class="modal-title">论文添加</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="addModeForm">
@@ -82,7 +82,7 @@
                     <div class="form-group">
                         <label for="author" class="col-sm-2 control-label">作者</label>
                         <div class="col-sm-5">
-<%--                            <input class="form-control" id="thesisAuthor" name="thesisAuthor">--%>
+                            <%--                            <input class="form-control" id="thesisAuthor" name="thesisAuthor">--%>
                             <input class="form-control" id="author" name="author">
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="thesisTypeId">发表刊物</label>
                         <div class="col-sm-5">
-<%--                            <select class="form-control" id="selectThesisType" name="thesisTypeId">--%>
+                            <%--                            <select class="form-control" id="selectThesisType" name="thesisTypeId">--%>
                             <select class="form-control" id="thesisTypeId" name="thesisTypeId">
 
                             </select>
@@ -110,7 +110,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="check">审核通过</label>
                         <div class="col-sm-5">
-<%--                            <select class="form-control" id="access" name="check">--%>
+                            <%--                            <select class="form-control" id="access" name="check">--%>
                             <select class="form-control" id="check" name="check">
                                 <option value="1">是</option>
                                 <option value="0">否</option>
@@ -127,8 +127,77 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+
+
+<%--修改员工的模态框--%>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="updateModel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">论文修改</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="updateModeForm">
+                    <div class="form-group">
+                        <label for="userThesisId" class="col-sm-2 control-label">UserID</label>
+                        <div class="col-sm-5">
+                            <%-- <input class="form-control" id="thesisAuthor" name="thesisAuthor">--%>
+                            <input class="form-control" id="userUpdateThesisId" name="userThesisId">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="author" class="col-sm-2 control-label">作者</label>
+                        <div class="col-sm-5">
+                            <%--                            <input class="form-control" id="thesisAuthor" name="thesisAuthor">--%>
+                            <input class="form-control" id="authorUpdate" name="author">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="title" class="col-sm-2 control-label">论文题目</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" id="titleUpdate" name="title">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="year" class="col-sm-2 control-label">当前时间</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" id="yearUpdate" name="year">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="thesisTypeIdUpdate">发表刊物</label>
+                        <div class="col-sm-5">
+                            <%--                            <select class="form-control" id="selectThesisType" name="thesisTypeId">--%>
+                            <select class="form-control" id="thesisTypeIdUpdate" name="thesisTypeId">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="checkUpdate">审核通过</label>
+                        <div class="col-sm-5">
+                            <%--                            <select class="form-control" id="access" name="check">--%>
+                            <select class="form-control" id="checkUpdate" name="check">
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="thesisTypeSaveUpdate">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <script type="text/javascript">
-    var userName,totalRecord;
+    var userName, totalRecord;
     $(function () {
         //去首页
         to_page("test", 1);
@@ -162,8 +231,10 @@
             var thesisAuthor = $("<td></td>").append(item.author);
             var thesisYear = $("<td></td>").append(item.year);
             var thesisCheck = $("<td></td>").append(item.check);
-            var editBtn = $("<button></button>").addClass("btn btn-default").append($("<span></span>").append("修改"));
-            var deleteBtn = $("<button></button>").addClass("btn btn-default").append($("<span></span>").append("删除"));
+            var editBtn = $("<button></button>").addClass("btn btn-default edit_btn").append($("<span></span>").append("编辑"));
+            editBtn.attr("edit-id", item.userThesisId);
+            var deleteBtn = $("<button></button>").addClass("btn btn-default delete_btn").append($("<span></span>").append("删除"));
+            deleteBtn.attr("del-id", item.empId);
             $("<tr></tr>").append(userThesisId)
                 .append(thesisName)
                 .append(thesisType)
@@ -224,21 +295,33 @@
         });
     })
 
+    $("#addButton").click(function () {
+        //发送ajax请求，查出发表期刊类型，显示在下拉列表中
+        getThesisType();
+        //弹出模态框
+        $("#addModel").modal({
+            backdrop: "static"
+        });
+    })
+
     //下拉列表的ajax请求
-    function getThesisType() {
-        $("#thesisTypeId").empty();
+    function getThesisType(ele) {
+        $(ele).empty();
         $.ajax({
             url: "/thesis/selectThesisType",
             type: "GET",
             success: function (result) {
                 $.each(result.extend.thesisType, function (index, item) {
                     var optionEle = $("<option></option>").append(item.type).attr("value", item.id);
-                    optionEle.appendTo("#thesisTypeId");
+                    optionEle.appendTo(ele);
                 });
             }
         });
     }
 
+
+    //点击保存
+    //先进行校验，校验成功之后再发送ajax请求
     $("#thesisTypeSave").click(function () {
         // alert($("#addModeForm").serialize());
         $.ajax({
@@ -248,11 +331,35 @@
             dataType: "json",
             success: function () {
                 $("#addModel").modal('hide');
-                to_page(userName,totalRecord);
+                to_page(userName, totalRecord);
             }
         });
     });
 
+    $(document).on("click",".edit_btn",function () {
+        //查出论文类型，并显示论文类型
+        getThesisType("#thesisTypeIdUpdate");
+        //查出员工信息，显示员工信息
+        getThesisInfo($(this).attr("edit-id"));
+        $("#updateModel").modal({
+            backdrop: "static"
+        });
+    })
+
+
+    function getThesisInfo(id) {
+        $.ajax({
+            url: "/getThesisInfo/ " + id,
+            type:"GET",
+            success: function (result) {
+                $("#userUpdateThesisId").text(result.extend.thesis.pageData.userThesisId);
+                $("#authorUpdate").val(result.extend.thesis.pageData.author);
+                $("#titleUpdate").val(result.extend.thesis.pageData.title);
+                $("#yearUpdate").val(result.extend.thesis.pageData.year);
+                $("#checkUpdate select").val(result.extend.thesis.pageData.check);
+            }
+        });
+    }
 
     /*-------------------- 获取系统当前时间方法start------------------------ */
     function datetime() {
