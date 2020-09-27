@@ -232,7 +232,7 @@
             var thesisYear = $("<td></td>").append(item.year);
             var thesisCheck = $("<td></td>").append(item.check);
             var editBtn = $("<button></button>").addClass("btn btn-default edit_btn").append($("<span></span>").append("编辑"));
-            editBtn.attr("edit-id", item.userThesisId);
+            editBtn.attr("edit-id", item.id);
             var deleteBtn = $("<button></button>").addClass("btn btn-default delete_btn").append($("<span></span>").append("删除"));
             deleteBtn.attr("del-id", item.empId);
             $("<tr></tr>").append(userThesisId)
@@ -337,27 +337,26 @@
     });
 
     $(document).on("click",".edit_btn",function () {
-        alert($(this).attr("edit-id"));
         //查出论文类型，并显示论文类型
         getThesisType("#thesisTypeIdUpdate");
         //查出员工信息，显示员工信息
         getThesisInfo($(this).attr("edit-id"));
         $("#updateModel").modal({
             backdrop: "static"
-        });
+        })
     })
 
 
     function getThesisInfo(id) {
         $.ajax({
-            url: "/getThesisInfo/" + id,
+            url: "/thesis/getThesisInfo/" + id,
             type:"GET",
             success: function (result) {
-                $("#userUpdateThesisId").text(result.extend.thesis.pageData.userThesisId);
-                $("#authorUpdate").val(result.extend.thesis.pageData.author);
-                $("#titleUpdate").val(result.extend.thesis.pageData.title);
-                $("#yearUpdate").val(result.extend.thesis.pageData.year);
-                $("#checkUpdate select").val(result.extend.thesis.pageData.check);
+                $("#userUpdateThesisId").text(result.extend.thesisInfo.userThesisId);
+                $("#authorUpdate").val(result.extend.thesisInfo.author);
+                $("#titleUpdate").val(result.extend.thesisInfo.title);
+                $("#yearUpdate").val(result.extend.thesisInfo.year);
+                $("#checkUpdate select").val(result.extend.thesisInfo.check);
             }
         });
     }
