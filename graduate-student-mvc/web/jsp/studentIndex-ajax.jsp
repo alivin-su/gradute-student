@@ -337,6 +337,7 @@
     });
 
     $(document).on("click",".edit_btn",function () {
+        alert($(this).attr("edit-id"));
         //查出论文类型，并显示论文类型
         getThesisType("#thesisTypeIdUpdate");
         //查出员工信息，显示员工信息
@@ -349,7 +350,7 @@
 
     function getThesisInfo(id) {
         $.ajax({
-            url: "/getThesisInfo/ " + id,
+            url: "/getThesisInfo/" + id,
             type:"GET",
             success: function (result) {
                 $("#userUpdateThesisId").text(result.extend.thesis.pageData.userThesisId);

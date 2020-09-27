@@ -64,27 +64,27 @@ public class StudentThesisController {
 
         pageThesis.setPageData(pageThesis1);
 
-        return Msg.success().add("thesis",pageThesis);
+        return Msg.success().add("thesis", pageThesis);
     }
 
     @ResponseBody
     @RequestMapping("/selectThesisType")
-    public Msg selectThesisType(){
+    public Msg selectThesisType() {
         List<Map<Integer, Object>> list = studentThesisService.selectThesisType();
-        return Msg.success().add("thesisType",list);
+        return Msg.success().add("thesisType", list);
     }
 
 
     @ResponseBody
-    @RequestMapping(value = "/saveThesis",method= RequestMethod.POST)
-    public Msg saveThesis(Thesis thesis){
+    @RequestMapping(value = "/saveThesis", method = RequestMethod.POST)
+    public Msg saveThesis(Thesis thesis) {
         String title = thesis.getTitle();
         Integer thesisTypeId = thesis.getThesisTypeId();
         String author = thesis.getAuthor();
         String year = thesis.getYear();
         Integer check = thesis.getCheck();
         Integer userThesisId = thesis.getUserThesisId();
-        studentThesisService.insertThesis(title,thesisTypeId,author,year,check,userThesisId);
+        studentThesisService.insertThesis(title, thesisTypeId, author, year, check, userThesisId);
         return Msg.success();
     }
 
@@ -96,9 +96,9 @@ public class StudentThesisController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getThesisInfo/{id}",method = RequestMethod.GET)
-    public Msg getThesisInfo(@PathVariable("id")Integer id){
-       Thesis thesis = studentThesisService.selectThesisInfo(id);
+    @RequestMapping(value = "/getThesisInfo/{id}", method = RequestMethod.GET)
+    public Msg getThesisInfo(@PathVariable("id") Integer id) {
+        Thesis thesis = studentThesisService.selectThesisInfo(id);
         return Msg.success().add("thesisInfo", thesis);
     }
 }

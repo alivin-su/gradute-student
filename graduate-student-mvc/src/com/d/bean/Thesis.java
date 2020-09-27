@@ -15,11 +15,9 @@ public class Thesis {
     private String author;
     private String year;
     private Integer check;
+    private Integer isDelete;
 
-    public Thesis() {
-    }
-
-    public Thesis(Integer id, Integer userThesisId, String title, Integer thesisTypeId, String author, String year, Integer check) {
+    public Thesis(Integer id, Integer userThesisId, String title, Integer thesisTypeId, String author, String year, Integer check, Integer isDelete) {
         this.id = id;
         this.userThesisId = userThesisId;
         this.title = title;
@@ -27,6 +25,10 @@ public class Thesis {
         this.author = author;
         this.year = year;
         this.check = check;
+        this.isDelete = isDelete;
+    }
+
+    public Thesis() {
     }
 
     public Integer getId() {
@@ -84,4 +86,13 @@ public class Thesis {
     public void setCheck(Integer check) {
         this.check = check;
     }
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
+    }
 }
+
