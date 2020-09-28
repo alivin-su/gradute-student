@@ -145,7 +145,7 @@
                         <label for="userThesisId" class="col-sm-2 control-label">UserID</label>
                         <div class="col-sm-5">
                             <%-- <input class="form-control" id="thesisAuthor" name="thesisAuthor">--%>
-                            <input class="form-control" id="userUpdateThesisId" name="userThesisId">
+                            <span class="form-control" id="userUpdateThesisId" name="userThesisId">
                         </div>
                     </div>
                     <div class="form-group">
@@ -288,16 +288,7 @@
     //点击新增按钮弹出模态框
     $("#addButton").click(function () {
         //发送ajax请求，查出发表期刊类型，显示在下拉列表中
-        getThesisType();
-        //弹出模态框
-        $("#addModel").modal({
-            backdrop: "static"
-        });
-    })
-
-    $("#addButton").click(function () {
-        //发送ajax请求，查出发表期刊类型，显示在下拉列表中
-        getThesisType();
+        getThesisType("#thesisTypeId");
         //弹出模态框
         $("#addModel").modal({
             backdrop: "static"
@@ -355,7 +346,8 @@
                 $("#userUpdateThesisId").text(result.extend.thesisInfo.userThesisId);
                 $("#authorUpdate").val(result.extend.thesisInfo.author);
                 $("#titleUpdate").val(result.extend.thesisInfo.title);
-                $("#yearUpdate").val(result.extend.thesisInfo.year);
+                $("#yearUpdate").addClass("disabled").val(datetime1());
+                $("#thesisTypeIdUpdate").val(result.extend.thesisInfo.thesisTypeId)
                 $("#checkUpdate select").val(result.extend.thesisInfo.check);
             }
         });
@@ -371,6 +363,16 @@
     }
 
     window.setInterval("datetime()", 1000);
+
+    function datetime1() {
+        var now = new Date();
+        document.getElementById("yearUpdate").value = now.getFullYear() + "-"
+            + (now.getMonth() + 1) + "-" + now.getDate();
+        document.getElementById("yearUpdate").value += " " + now.getHours() + ":"
+            + now.getMinutes();
+    }
+
+    window.setInterval("datetime1()", 1000);
     /*--------------------------- 获取系统当前时间方法end------------------------ */
 </script>
 </body>
