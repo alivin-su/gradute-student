@@ -101,4 +101,11 @@ public class StudentThesisController {
         Thesis thesis = studentThesisService.selectThesisInfo(id);
         return Msg.success().add("thesisInfo", thesis);
     }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/updateThesisInfo/{id}",method = RequestMethod.POST)
+    public Msg updateThesisInfo(@PathVariable("id")Integer id){
+
+    }
 }

@@ -128,7 +128,6 @@
 </div><!-- /.modal -->
 
 
-
 <%--修改员工的模态框--%>
 
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="updateModel">
@@ -327,7 +326,7 @@
         });
     });
 
-    $(document).on("click",".edit_btn",function () {
+    $(document).on("click", ".edit_btn", function () {
         //查出论文类型，并显示论文类型
         getThesisType("#thesisTypeIdUpdate");
         //查出员工信息，显示员工信息
@@ -341,7 +340,7 @@
     function getThesisInfo(id) {
         $.ajax({
             url: "/thesis/getThesisInfo/" + id,
-            type:"GET",
+            type: "GET",
             success: function (result) {
                 $("#userUpdateThesisId").text(result.extend.thesisInfo.userThesisId);
                 $("#authorUpdate").val(result.extend.thesisInfo.author);
@@ -352,6 +351,25 @@
             }
         });
     }
+
+    //**************
+    $("#thesisTypeSaveUpdate").click(function () {
+        thesisTypeSaveUpdate($(this).attr("edit-id"));
+    })
+
+
+    function thesisTypeSaveUpdate(id) {
+        $.ajax({
+            url: "/thesis/updateThesisInfo/" + id, //controller层方法还没有创建
+            type: "Post",
+            data: $("#updateModel").serialize(),
+            dataType: "json",
+            success: function () {
+                alert($("#updateModel").serialize());
+            }
+        })
+    }
+    //**************
 
     /*-------------------- 获取系统当前时间方法start------------------------ */
     function datetime() {
