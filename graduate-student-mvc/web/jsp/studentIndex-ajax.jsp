@@ -362,15 +362,15 @@
     $(document).on("click",".delete_btn",function () {
         // alert($(this).attr("del-currentPage"));
         // alert($(this).attr("del-id"));
-        deleteThesisInfo($(this).attr("del-id"));
+        deleteThesisInfo($(this).attr("del-id"),$(this).attr("del-currentPage"));
     })
 
-    function deleteThesisInfo(id){
+    function deleteThesisInfo(id,currentPage){
         $.ajax({
             url:"/thesis/deleteThesisInfo/"+id,
             type:"DELETE",
             success: function () {
-                to_page(userName,$(this).attr("del-currentPage"))
+                to_page(userName,currentPage)
             }
         })
     }
@@ -387,7 +387,7 @@
     // function thesisTypeSaveUpdate() {
     //     alert($("#updateModeForm").serialize());
         $.ajax({
-            url: "/thesis/updateThesisInfo/" + id, //controller层方法还没有创建
+            url: "/thesis/updateThesisInfo/" + id,
             type: "Post",
             data: $("#updateModeForm").serialize(),
             dataType: "json",

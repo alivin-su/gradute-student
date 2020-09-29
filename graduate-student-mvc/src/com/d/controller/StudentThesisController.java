@@ -116,7 +116,7 @@ public class StudentThesisController {
         return Msg.success().add("updateThesisInfo",thesis);
     }
 
-
+    @ResponseBody
     @RequestMapping(value = "/deleteThesisInfo/{id}", method = RequestMethod.DELETE)
     public Msg deleteThesisInfo(@PathVariable("id") Integer id) {
         studentThesisService.deleteThesisInfo(id);
