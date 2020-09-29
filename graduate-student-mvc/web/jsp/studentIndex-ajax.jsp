@@ -233,6 +233,7 @@
             var editBtn = $("<button></button>").addClass("btn btn-default edit_btn").append($("<span></span>").append("编辑"));
             editBtn.attr("edit-id", item.id);
             $("#thesisTypeSaveUpdate").attr("update-id", item.id);
+            $("#thesisTypeSaveUpdate").attr("currentPage",  result.extend.thesis.currentPage);
             var deleteBtn = $("<button></button>").addClass("btn btn-default delete_btn").append($("<span></span>").append("删除"));
             deleteBtn.attr("del-id", item.empId);
             $("<tr></tr>").append(userThesisId)
@@ -328,6 +329,7 @@
     });
 
     $(document).on("click", ".edit_btn", function () {
+        // alert($(this).attr("edit-id"));
         //查出论文类型，并显示论文类型
         getThesisType("#thesisTypeIdUpdate");
         //查出员工信息，显示员工信息
@@ -355,19 +357,25 @@
 
     //**************
     $("#thesisTypeSaveUpdate").click(function () {
-        // alert($("#thesisTypeSaveUpdate").attr("update-id"));
-        thesisTypeSaveUpdate($("#thesisTypeSaveUpdate").attr("update-id"));
+        alert($("#thesisTypeSaveUpdate").attr("update-id"));
+        alert($("#thesisTypeSaveUpdate").attr("currentPage"));
+        // thesisTypeSaveUpdate($("#thesisTypeSaveUpdate").attr("update-id"));
+        // thesisTypeSaveUpdate();
     })
 
 
     function thesisTypeSaveUpdate(id) {
+    // function thesisTypeSaveUpdate() {
+    //     alert($("#updateModeForm").serialize());
         $.ajax({
             url: "/thesis/updateThesisInfo/" + id, //controller层方法还没有创建
             type: "Post",
-            data: $("#updateModel").serialize(),
+            data: $("#updateModeForm").serialize(),
             dataType: "json",
-            success: function () {
-                alert($("#updateModel").serialize());
+            success: function (result) {
+                // $("#updateModel").modal('hide');
+                // alert(JSON.stringify(result));
+                to_page(userName,$("#thesisTypeSaveUpdate").attr("currentPage"))
             }
         })
     }

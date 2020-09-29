@@ -22,5 +22,5 @@ public interface StudentThesisMapper {
     Thesis selectThesisInfo(Integer id);
 
 
-    void updateThesisInfo(Integer id, String title, Integer thesisTypeId, String author, String year, Integer check, Integer userThesisId);
+    void updateThesisInfo(Integer id, String title, Integer thesisTypeId, String author, String year, Integer check);
 }

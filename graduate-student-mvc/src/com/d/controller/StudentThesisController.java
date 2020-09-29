@@ -118,7 +118,7 @@ public class StudentThesisController {
         System.out.println(year);
         System.out.println(check);
         System.out.println(userThesisId);
-        studentThesisService.updateThesisInfo(id,title,thesisTypeId,author,year,check,userThesisId);
+        studentThesisService.updateThesisInfo(id,title,thesisTypeId,author,year,check);
         return Msg.success().add("updateThesisInfo",thesis);
     }
 }

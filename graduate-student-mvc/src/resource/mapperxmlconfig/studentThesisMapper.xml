@@ -5,7 +5,7 @@
         insert into `thesis`(`title`,`thesis_type_id`,`author`,`year`,`check`,`user_thesis_id`) values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
     </insert>
     <update id="updateThesisInfo">
-        update `thesis` set `title` =  #{param2},`thesis_type_id` = #{param3},`author` =  #{param4},`year` = #{param5},`check` = #{param6},`user_thesis_id` =  #{param7} where `id` = #{param1}
+        update `thesis` set `title` =  #{param2},`thesis_type_id` = #{param3},`author` =  #{param4},`year` = #{param5},`check` = #{param6} where `id` = #{param1}
     </update>
 
     <select id="selectThesis" resultType="com.d.bean.Thesis">
