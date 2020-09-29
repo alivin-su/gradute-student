@@ -115,4 +115,11 @@ public class StudentThesisController {
         studentThesisService.updateThesisInfo(id,title,thesisTypeId,author,year,check);
         return Msg.success().add("updateThesisInfo",thesis);
     }
+
+
+    @RequestMapping(value = "/deleteThesisInfo/{id}", method = RequestMethod.GET)
+    public Msg deleteThesisInfo(@PathVariable("id") Integer id) {
+        studentThesisService.deleteThesisInfo(id);
+        return Msg.success();
+    }
 }

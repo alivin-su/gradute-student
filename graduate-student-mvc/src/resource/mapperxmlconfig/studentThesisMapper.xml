@@ -2,32 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.d.mapper.StudentThesisMapper">
     <insert id="insertThesis">
-        insert into `thesis`(`title`,`thesis_type_id`,`author`,`year`,`check`,`user_thesis_id`) values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
+        insert into `thesis`(`title`, `thesis_type_id`, `author`, `year`, `check`, `user_thesis_id`)
+        values (#{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6})
     </insert>
     <update id="updateThesisInfo">
-        update `thesis` set `title` =  #{param2},`thesis_type_id` = #{param3},`author` =  #{param4},`year` = #{param5},`check` = #{param6} where `id` = #{param1}
+        update `thesis`
+        set `title`          = #{param2},
+            `thesis_type_id` = #{param3},
+            `author`         = #{param4},
+            `year`           = #{param5},
+            `check`          = #{param6}
+        where `id` = #{param1}
     </update>
 
+    <delete id="deleteThesisInfo">
+        update `thesis` set `is_delete` = 1 where `id` = #{id}
+    </delete>
+
     <select id="selectThesis" resultType="com.d.bean.Thesis">
-        select `id`, `title`,  `author`, `year`, `check`,`thesis_type_id`
+        select `id`, `title`, `author`, `year`, `check`, `thesis_type_id`
         from `thesis`
-        where `user_thesis_id` = (select id from student where name = #{name})
+        where `user_thesis_id` = (select `id` from `student` where `name` = #{name} and `is_delete` = 0)
     </select>
     <select id="selectThesisById" resultType="com.d.bean.Thesis">
-        select `title`,  `author`, `year`, `check`,`thesis_type_id`
+        select `title`, `author`, `year`, `check`, `thesis_type_id`
         from `thesis`
-        where id = #{thesisID}
+        where id = #{thesisID} and `is_delete` = 0
     </select>
     <select id="selectThesisByPage" resultType="com.d.bean.Thesis">
-        select `id`, `title`, `thesis_type_id`, `author`, `year`, `check`,`user_thesis_id`
+        select `id`, `title`, `thesis_type_id`, `author`, `year`, `check`, `user_thesis_id`
         from `thesis`
-        where `user_thesis_id` = (select id from student where name = #{param1}) limit #{param2},#{param3}
+        where `user_thesis_id` = (select id from student where name = #{param1} and `is_delete` = 0) and `is_delete` = 0
+        limit #{param2},#{param3}
     </select>
     <select id="selectThesisType" resultType="java.util.Map">
-        select `id`,`type` from `thesistype`
+        select `id`, `type`
+        from `thesistype`
     </select>
     <select id="selectThesisInfo" resultType="com.d.bean.Thesis">
-        select `id`,`title`,`author`,`year`,`check`,`user_thesis_id`,`is_delete`,`thesis_type_id` from `thesis` where `id` = #{id}
+        select `id`,
+               `title`,
+               `author`,
+               `year`,
+               `check`,
+               `user_thesis_id`,
+               `is_delete`,
+               `thesis_type_id`
+        from `thesis`
+        where `id` = #{id} and `is_delete` = 0
     </select>
 
 </mapper>

@@ -233,7 +233,7 @@
             var editBtn = $("<button></button>").addClass("btn btn-default edit_btn").append($("<span></span>").append("编辑"));
             editBtn.attr("edit-id", item.id);
             var deleteBtn = $("<button></button>").addClass("btn btn-default delete_btn").append($("<span></span>").append("删除"));
-            deleteBtn.attr("del-id", item.empId);
+            deleteBtn.attr("del-id", item.id);
             $("<tr></tr>").append(userThesisId)
                 .append(thesisName)
                 .append(thesisType)
@@ -327,6 +327,7 @@
         });
     });
 
+    //修改
     $(document).on("click", ".edit_btn", function () {
         // alert($(this).attr("edit-id"));
         //查出论文类型，并显示论文类型
@@ -339,7 +340,6 @@
             backdrop: "static"
         })
     })
-
 
     function getThesisInfo(id) {
         $.ajax({
@@ -356,7 +356,22 @@
         });
     }
 
-    //**************
+    //删除
+    $(document).on("click",".delete_btn",function () {
+        deleteThesisInfo($(this).attr("del-id"));
+        // alert($(this).attr("del-id"));
+    })
+
+    function deleteThesisInfo(id){
+        $.ajax({
+            url:"/thesis/deleteThesisInfo/"+id,
+            type:"GET",
+            success: function () {
+                to_page(userName,1)
+            }
+        })
+    }
+
     $("#thesisTypeSaveUpdate").click(function () {
         // alert($("#thesisTypeSaveUpdate").attr("update-id"));
         // alert($("#thesisTypeSaveUpdate").attr("currentPage"));
@@ -373,14 +388,14 @@
             type: "Post",
             data: $("#updateModeForm").serialize(),
             dataType: "json",
-            success: function (result) {
+            success: function () {
                 $("#updateModel").modal('hide');
                 // alert(JSON.stringify(result));
                 to_page(userName,$("#thesisTypeSaveUpdate").attr("currentPage"))
             }
         })
     }
-    //**************
+
 
     /*-------------------- 获取系统当前时间方法start------------------------ */
     function datetime() {

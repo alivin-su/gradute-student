@@ -23,4 +23,6 @@ public interface StudentThesisMapper {
 
 
     void updateThesisInfo(Integer id, String title, Integer thesisTypeId, String author, String year, Integer check);
+
+    void deleteThesisInfo(Integer id);
 }

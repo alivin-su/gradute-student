@@ -58,4 +58,9 @@ public class StudentThesisImpl implements StudentThesisService {
         studentThesisMapper.updateThesisInfo(id, title, thesisTypeId, author, year, check);
     }
 
+    @Override
+    public void deleteThesisInfo(Integer id) {
+        studentThesisMapper.deleteThesisInfo(id);
+    }
+
 }
