@@ -232,8 +232,10 @@
             var thesisCheck = $("<td></td>").append(item.check);
             var editBtn = $("<button></button>").addClass("btn btn-default edit_btn").append($("<span></span>").append("编辑"));
             editBtn.attr("edit-id", item.id);
+            editBtn.attr("edit-currentPage", result.extend.thesis.currentPage);
             var deleteBtn = $("<button></button>").addClass("btn btn-default delete_btn").append($("<span></span>").append("删除"));
             deleteBtn.attr("del-id", item.id);
+            deleteBtn.attr("del-currentPage", result.extend.thesis.currentPage);
             $("<tr></tr>").append(userThesisId)
                 .append(thesisName)
                 .append(thesisType)
@@ -358,16 +360,17 @@
 
     //删除
     $(document).on("click",".delete_btn",function () {
-        deleteThesisInfo($(this).attr("del-id"));
+        // alert($(this).attr("del-currentPage"));
         // alert($(this).attr("del-id"));
+        deleteThesisInfo($(this).attr("del-id"));
     })
 
     function deleteThesisInfo(id){
         $.ajax({
             url:"/thesis/deleteThesisInfo/"+id,
-            type:"GET",
+            type:"DELETE",
             success: function () {
-                to_page(userName,1)
+                to_page(userName,$(this).attr("del-currentPage"))
             }
         })
     }

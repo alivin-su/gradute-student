@@ -117,7 +117,7 @@ public class StudentThesisController {
     }
 
 
-    @RequestMapping(value = "/deleteThesisInfo/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteThesisInfo/{id}", method = RequestMethod.DELETE)
     public Msg deleteThesisInfo(@PathVariable("id") Integer id) {
         studentThesisService.deleteThesisInfo(id);
         return Msg.success();
