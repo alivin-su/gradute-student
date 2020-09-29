@@ -53,4 +53,9 @@ public class StudentThesisImpl implements StudentThesisService {
         return studentThesisMapper.selectThesisInfo(id);
     }
 
+    @Override
+    public void updateThesisInfo(Integer id, String title, Integer thesisTypeId, String author, String year, Integer check, Integer userThesisId) {
+        studentThesisMapper.updateThesisInfo(id, title, thesisTypeId, author, year, check, userThesisId);
+    }
+
 }

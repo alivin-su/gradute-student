@@ -232,6 +232,7 @@
             var thesisCheck = $("<td></td>").append(item.check);
             var editBtn = $("<button></button>").addClass("btn btn-default edit_btn").append($("<span></span>").append("编辑"));
             editBtn.attr("edit-id", item.id);
+            $("#thesisTypeSaveUpdate").attr("update-id", item.id);
             var deleteBtn = $("<button></button>").addClass("btn btn-default delete_btn").append($("<span></span>").append("删除"));
             deleteBtn.attr("del-id", item.empId);
             $("<tr></tr>").append(userThesisId)
@@ -354,7 +355,8 @@
 
     //**************
     $("#thesisTypeSaveUpdate").click(function () {
-        thesisTypeSaveUpdate($(this).attr("edit-id"));
+        // alert($("#thesisTypeSaveUpdate").attr("update-id"));
+        thesisTypeSaveUpdate($("#thesisTypeSaveUpdate").attr("update-id"));
     })
 
 
