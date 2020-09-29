@@ -232,8 +232,6 @@
             var thesisCheck = $("<td></td>").append(item.check);
             var editBtn = $("<button></button>").addClass("btn btn-default edit_btn").append($("<span></span>").append("编辑"));
             editBtn.attr("edit-id", item.id);
-            $("#thesisTypeSaveUpdate").attr("update-id", item.id);
-            $("#thesisTypeSaveUpdate").attr("currentPage",  result.extend.thesis.currentPage);
             var deleteBtn = $("<button></button>").addClass("btn btn-default delete_btn").append($("<span></span>").append("删除"));
             deleteBtn.attr("del-id", item.empId);
             $("<tr></tr>").append(userThesisId)
@@ -246,6 +244,7 @@
                 .append(deleteBtn)
                 .appendTo("#studentTable tbody");
             userName = result.extend.thesis.student.name;
+            $("#thesisTypeSaveUpdate").attr("currentPage",  result.extend.thesis.currentPage);
         })
     }
 
@@ -334,6 +333,8 @@
         getThesisType("#thesisTypeIdUpdate");
         //查出员工信息，显示员工信息
         getThesisInfo($(this).attr("edit-id"));
+        //把论文id传给模态框的更新按钮
+        $("#thesisTypeSaveUpdate").attr("update-id",$(this).attr("edit-id"))
         $("#updateModel").modal({
             backdrop: "static"
         })
@@ -357,9 +358,9 @@
 
     //**************
     $("#thesisTypeSaveUpdate").click(function () {
-        alert($("#thesisTypeSaveUpdate").attr("update-id"));
-        alert($("#thesisTypeSaveUpdate").attr("currentPage"));
-        // thesisTypeSaveUpdate($("#thesisTypeSaveUpdate").attr("update-id"));
+        // alert($("#thesisTypeSaveUpdate").attr("update-id"));
+        // alert($("#thesisTypeSaveUpdate").attr("currentPage"));
+        thesisTypeSaveUpdate($("#thesisTypeSaveUpdate").attr("update-id"));
         // thesisTypeSaveUpdate();
     })
 
@@ -373,7 +374,7 @@
             data: $("#updateModeForm").serialize(),
             dataType: "json",
             success: function (result) {
-                // $("#updateModel").modal('hide');
+                $("#updateModel").modal('hide');
                 // alert(JSON.stringify(result));
                 to_page(userName,$("#thesisTypeSaveUpdate").attr("currentPage"))
             }

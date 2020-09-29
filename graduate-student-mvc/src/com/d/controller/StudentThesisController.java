@@ -112,12 +112,6 @@ public class StudentThesisController {
         String year = thesis.getYear();
         Integer check = thesis.getCheck();
         Integer userThesisId = thesis.getUserThesisId();
-        System.out.println(id);
-        System.out.println(title);
-        System.out.println(thesisTypeId);
-        System.out.println(year);
-        System.out.println(check);
-        System.out.println(userThesisId);
         studentThesisService.updateThesisInfo(id,title,thesisTypeId,author,year,check);
         return Msg.success().add("updateThesisInfo",thesis);
     }
