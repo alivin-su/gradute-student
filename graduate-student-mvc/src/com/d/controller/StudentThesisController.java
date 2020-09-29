@@ -104,7 +104,7 @@ public class StudentThesisController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/updateThesisInfo/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateThesisInfo/{id}", method = RequestMethod.POST )
     public Msg updateThesisInfo(@PathVariable("id") Integer id,Thesis thesis) {
         String title = thesis.getTitle();
         Integer thesisTypeId = thesis.getThesisTypeId();
